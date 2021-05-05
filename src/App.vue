@@ -1,26 +1,46 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="bienvenue"/>
+  <Viewmain v-model="people"/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  import Viewmain from '@/views/Viewmain.vue';
+
+  export default {
+    name: 'App',
+    components: {
+      Viewmain,
+    },
+    data() {
+      return {
+        people: [],
+      };
+    },
+    methods: {
+      retrievePeople() {
+        return fetch('https://run.mocky.io/v3/70e5b0ad-7112-41c5-853e-b382a39e65b7');
+      },
+    },
+    created() {
+      this.retrievePeople()
+        .then((data) => data.json())
+        .then((data) => {
+          this.people = data.people;
+        })
+        .catch((e) => console.log('Error while retrieving data!', e));
+    },
+  };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
+  body {
+    --border-radius: 8px;
+    background: radial-gradient(circle, var(--color-1-alpha) 0%, var(--color-2-alpha) 70%);
+  }
+
+  button, input, select, label {
+    border-radius:var(--border-radius);
+  }
+
 </style>

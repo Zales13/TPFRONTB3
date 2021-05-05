@@ -1,10 +1,5 @@
 <template>
   <div class="row form">
-    <div class="search-container">
-      <label for="search">Search: </label>
-      <input id="search" class="search-input" type="text" v-model="search" placeholder="Search..."/>
-      <button id="export" @click="exportData">Export to JSON</button>
-    </div>
     <div class="filter-switch-container">
       <label>Filters: </label>
       <Switch class="filter-switch" v-model="enableFilter" />
